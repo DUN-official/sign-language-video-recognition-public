@@ -7,7 +7,6 @@ import pandas as pd
 import torch
 import yaml
 
-from mediapipe_tasks_landmarks import HandLandmarkExtractor
 from models_v2 import build_model
 from preprocess_video import sample_video_frames
 
@@ -16,6 +15,23 @@ def load_yaml(path: Path) -> dict:
     if path is None or not path.exists():
         return {}
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
+def get_mediapipe_hands_module():
+    """Return the classic MediaPipe Hands solution.
+
+    The MediaPipe Tasks HandLandmarker API can fail to load native shared
+    libraries on Streamlit Cloud. The classic Hands solution is enough for this
+    app because the model only needs 2 hands x 21 landmarks x 3 coordinates.
+    """
+    try:
+        import mediapipe as mp
+
+        return mp.solutions.hands
+    except AttributeError:
+        from mediapipe.python.solutions import hands
+
+        return hands
 
 
 def normalize_video_id(video_id) -> str:
@@ -138,20 +154,9 @@ def video_to_landmark_sequence(
     frame_size: int | None = None,
 ):
     preprocessing_cfg = dataset_cfg.get("preprocessing", {})
-    mediapipe_cfg = dataset_cfg.get("mediapipe", {})
 
     frame_size = int(frame_size or preprocessing_cfg.get("frame_size", 224))
     max_hands = int(preprocessing_cfg.get("max_hands", 2))
-
-    model_path = Path(mediapipe_cfg.get("model_path", "models/hand_landmarker.task"))
-    fps = float(mediapipe_cfg.get("fps", 30.0))
-    input_color = mediapipe_cfg.get("input_color", "rgb")
-
-    if not model_path.exists():
-        raise FileNotFoundError(
-            f"MediaPipe model file not found: {model_path}\n"
-            "Run: py scripts/download_hand_landmarker_model.py"
-        )
 
     frames = sample_video_frames(
         video_path,
@@ -159,13 +164,35 @@ def video_to_landmark_sequence(
         frame_size=frame_size,
     )
 
-    with HandLandmarkExtractor(
-        model_path=model_path,
-        max_hands=max_hands,
-        fps=fps,
-        input_color=input_color,
-    ) as extractor:
-        return extractor.extract_from_frames(frames).astype("float32")
+    mp_hands = get_mediapipe_hands_module()
+    hands = mp_hands.Hands(
+        static_image_mode=False,
+        max_num_hands=max_hands,
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5,
+    )
+
+    sequence = []
+
+    try:
+        for frame in frames:
+            result = hands.process(frame)
+            frame_landmarks = np.zeros((max_hands, 21, 3), dtype=np.float32)
+
+            if result.multi_hand_landmarks:
+                for hand_idx, hand in enumerate(result.multi_hand_landmarks[:max_hands]):
+                    for point_idx, point in enumerate(hand.landmark):
+                        frame_landmarks[hand_idx, point_idx] = [
+                            point.x,
+                            point.y,
+                            point.z,
+                        ]
+
+            sequence.append(frame_landmarks.reshape(-1))
+    finally:
+        hands.close()
+
+    return np.stack(sequence).astype("float32")
 
 
 def wrist_normalize(arr):
@@ -278,6 +305,7 @@ def load_checkpoint(checkpoint_path):
 def predict_video(
     video_path,
     checkpoint_path,
+    train_config_path=None,
     top_k=5,
     num_frames=32,
     dataset_config_path=None,
@@ -285,8 +313,9 @@ def predict_video(
     include_true_label=False,
 ):
     video_path = Path(video_path)
-    train_cfg = load_yaml(Path("configs/train.yaml"))
-    dataset_config = resolve_dataset_config(Path("configs/train.yaml"), dataset_config_path)
+    train_config = Path(train_config_path) if train_config_path is not None else Path("configs/train.yaml")
+    train_cfg = load_yaml(train_config)
+    dataset_config = resolve_dataset_config(train_config, dataset_config_path)
     dataset_cfg = load_yaml(dataset_config)
 
     model, id_to_label, device, checkpoint = load_checkpoint(checkpoint_path)
