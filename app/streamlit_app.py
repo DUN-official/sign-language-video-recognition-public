@@ -421,7 +421,7 @@ if st.button("Run prediction"):
 
     available_cols = [col for col in display_cols if col in df.columns]
     #st.dataframe(df[available_cols], use_container_width=True)
-    st.dataframe(df[available_cols], width="stretch")
+    st.dataframe(df[available_cols], use_container_width=True)
 
     st.subheader("Landmark extraction check")
     st.write(f"Extracted landmark tensor shape: `{landmarks.shape}`")
