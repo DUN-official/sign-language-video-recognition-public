@@ -4,6 +4,26 @@ This repository contains an end-to-end prototype for isolated American Sign Lang
 
 The final demo focuses on a quality-controlled 6-class model derived from a larger WLASL500 candidate pool. Earlier WLASL100, quality20, and WLASL500 experiments are preserved under `models/experiments/` and `results/experiments/` for transparency.
 
+## Live App
+
+The deployed Streamlit demo is available here:
+
+```text
+https://sign-language-video-recognition-public-v1.streamlit.app/
+```
+
+Recommended demo flow:
+
+```text
+1. Choose "Curated trained-class demo clip".
+2. Select one of the final trained classes, such as drink.
+3. Select a demo video.
+4. Click "Run prediction".
+5. Review the top-k predictions, confidence values, true-label comparison, and landmark tensor shape.
+```
+
+Custom uploads are supported, but they are exploratory. The model was trained on a small quality-controlled WLASL subset, so custom videos outside the trained classes or with different framing may produce unreliable predictions.
+
 ## Final Demo
 
 ![Streamlit demo selection](assets/screenshots/final/streamlit_demo_selection.png)
@@ -96,6 +116,41 @@ Top-k predictions: 5
 
 Use **Curated trained-class demo clip** for the most reliable demonstration. Use **Upload custom video** for exploratory testing.
 
+## Streamlit Cloud Deployment
+
+The public app is deployed from:
+
+```text
+app/streamlit_app.py
+```
+
+For Streamlit Cloud, use Python 3.11 and headless OpenCV. The deployment files should include:
+
+```text
+runtime.txt
+packages.txt
+requirements.txt
+```
+
+Recommended `runtime.txt`:
+
+```text
+python-3.11
+```
+
+Recommended `packages.txt`:
+
+```text
+libgl1
+libglib2.0-0t64
+libgomp1
+libsm6
+libxext6
+libxrender1
+```
+
+The app uses a Streamlit-compatible MediaPipe inference path. During deployment, broad dependency ranges installed newer packages that broke compatibility, so the deployed app should keep runtime dependencies pinned rather than using training-oriented `>=` ranges.
+
 ## Reproduce The Data Pipeline
 
 The full WLASL raw videos and generated landmark arrays are not included in this clean package. To rebuild locally, place the official WLASL metadata at:
@@ -133,11 +188,10 @@ docs/MODEL_EXPERIMENTS.md
 
 ## Project Status
 
-The repository demonstrates a complete working ASL video recognition pipeline:
+This repository demonstrates a complete working ASL video recognition pipeline:
 
 ```text
 video -> frame sampling -> hand landmarks -> temporal model -> top-k prediction -> Streamlit demo
 ```
 
-The strongest current value is the full engineering pipeline, model iteration process, quality filtering, and honest evaluation. Further accuracy improvements would likely require more usable labelled data, better video trimming, body/pose/face landmarks, and possibly pretrained video-language or sign-language models.
-
+The project shows a full engineering pipeline, model iteration process, quality filtering, and evaluation. Further accuracy improvements would likely require more usable labelled data, better video trimming, body/pose/face landmarks, and possibly pretrained video-language or sign-language models.
