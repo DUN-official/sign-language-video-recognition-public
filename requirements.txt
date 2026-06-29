@@ -1,9 +1,10 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 streamlit==1.40.2
 numpy==1.26.4
 pandas==2.2.3
 pyyaml==6.0.2
 pillow==10.4.0
-torch==2.3.1
+torch==2.3.1+cpu
 opencv-python-headless==4.10.0.84
 mediapipe==0.10.14
-matplotlib==3.8.4
