@@ -6,5 +6,28 @@ __pycache__/
 .venv/
 venv/
 
+# Local/generated datasets
+data/raw/
+data/processed/
+data/landmarks/
+data/cache/
+
+# Models and training outputs
+models/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Runtime outputs
+results/
+logs/
+*.log
+
+# Large demo media
+assets/demo_clips/*
+!assets/demo_clips/.gitkeep
+assets/screenshots/*
+!assets/screenshots/.gitkeep
 
 
