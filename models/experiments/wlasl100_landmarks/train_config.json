@@ -1,0 +1,15 @@
+{
+  "manifest": "data/processed/wlasl100_manifest_landmarks.csv",
+  "output_dir": "models/wlasl100_landmarks",
+  "model": "bilstm",
+  "max_classes": null,
+  "epochs": 25,
+  "batch_size": 32,
+  "hidden_dim": 256,
+  "num_layers": 2,
+  "dropout": 0.3,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "seed": 42,
+  "num_workers": 0
+}

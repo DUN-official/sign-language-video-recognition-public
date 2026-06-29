@@ -1,0 +1,6 @@
+true_gloss,samples,correct,top1_accuracy
+before,2,0,0.0
+book,2,0,0.0
+drink,2,0,0.0
+chair,1,0,0.0
+computer,1,1,1.0

@@ -1,0 +1,21 @@
+{
+  "manifest": "data/processed/wlasl100_manifest_landmarks.csv",
+  "output_dir": "models/wlasl100_v2_transformer",
+  "model": "transformer",
+  "max_classes": null,
+  "epochs": 50,
+  "batch_size": 32,
+  "hidden_dim": 256,
+  "num_layers": 3,
+  "num_heads": 4,
+  "dropout": 0.25,
+  "lr": 0.0005,
+  "weight_decay": 0.0001,
+  "normalize": "wrist",
+  "use_delta": true,
+  "use_class_weights": true,
+  "balanced_sampler": true,
+  "patience": 10,
+  "seed": 42,
+  "num_workers": 0
+}

@@ -1,0 +1,21 @@
+{
+  "manifest": "data/processed/wlasl100_quality20_manifest.csv",
+  "output_dir": "models/wlasl100_quality20_transformer",
+  "model": "transformer",
+  "max_classes": null,
+  "epochs": 40,
+  "batch_size": 32,
+  "hidden_dim": 256,
+  "num_layers": 3,
+  "num_heads": 4,
+  "dropout": 0.25,
+  "lr": 0.0005,
+  "weight_decay": 0.0001,
+  "normalize": "wrist",
+  "use_delta": true,
+  "use_class_weights": true,
+  "balanced_sampler": true,
+  "patience": 8,
+  "seed": 42,
+  "num_workers": 0
+}

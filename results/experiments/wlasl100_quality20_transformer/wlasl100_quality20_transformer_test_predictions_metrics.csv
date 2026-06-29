@@ -1,0 +1,2 @@
+split,samples,top1_accuracy,top5_accuracy
+test,34,0.5,0.5882352941176471

@@ -1,0 +1,23 @@
+{
+  "manifest": "data/processed/wlasl500_best50_manifest.csv",
+  "output_dir": "models/wlasl500_best50_v3_scratch",
+  "model": "transformer",
+  "epochs": 70,
+  "batch_size": 32,
+  "hidden_dim": 256,
+  "num_layers": 3,
+  "num_heads": 4,
+  "dropout": 0.25,
+  "lr": 0.0003,
+  "weight_decay": 0.0001,
+  "normalize": "wrist",
+  "use_delta": true,
+  "use_class_weights": true,
+  "balanced_sampler": true,
+  "label_smoothing": 0.05,
+  "init_checkpoint": null,
+  "freeze_backbone_epochs": 0,
+  "patience": 12,
+  "seed": 42,
+  "num_workers": 0
+}

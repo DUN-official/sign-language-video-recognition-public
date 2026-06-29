@@ -1,0 +1,22 @@
+dataset:
+  config_path: configs/dataset.yaml
+  landmarks_dir: data/landmarks/wlasl100
+  manifest_path: data/processed/wlasl100_manifest_landmarks.csv
+  num_classes: 100
+
+model:
+  name: bilstm
+  input_size: 126
+  hidden_size: 256
+  num_layers: 2
+  dropout: 0.3
+
+training:
+  seed: 0
+  batch_size: 32
+  epochs: 30
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  output_dir: models
+  results_dir: results
+  top_k: 5

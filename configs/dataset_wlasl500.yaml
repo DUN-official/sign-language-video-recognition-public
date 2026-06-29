@@ -1,0 +1,35 @@
+dataset:
+  name: wlasl500
+  task: isolated_word_recognition
+
+  metadata_path: data/raw/WLASL/WLASL_v0.3.json
+  subset_index_json: data/raw/WLASL500/WLASL500.json
+  raw_video_dir: data/raw/WLASL500/videos
+  landmarks_dir: data/landmarks/wlasl500
+
+  original_manifest_csv: data/processed/wlasl500_manifest.csv
+  downloaded_manifest_csv: data/processed/wlasl500_manifest_downloaded.csv
+  landmark_manifest_csv: data/processed/wlasl500_manifest_landmarks.csv
+  missing_landmark_manifest_csv: data/processed/wlasl500_manifest_missing_landmarks.csv
+
+  # Backward-compatible aliases for older scripts.
+  processed_manifest: data/processed/wlasl500_manifest_downloaded.csv
+  landmark_manifest: data/processed/wlasl500_manifest_landmarks.csv
+
+preprocessing:
+  num_frames: 64
+  frame_size: 224
+  max_hands: 2
+  landmarks_per_hand: 21
+  coordinates: 3
+  missing_hand_value: 0.0
+  normalize_landmarks: true
+
+splits:
+  train: train
+  val: val
+  test: test
+
+logging:
+  landmark_log_dir: logs/landmark_extraction_wlasl500
+

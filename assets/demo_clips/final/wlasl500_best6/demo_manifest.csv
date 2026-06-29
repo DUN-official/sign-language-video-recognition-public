@@ -1,0 +1,13 @@
+video_id,gloss,label_id,split,demo_video_path,source_video_path,source_manifest
+12306,computer,0,test,assets/demo_clips/final/wlasl500_best6/computer/12306.mp4,assets/demo_clips/final/wlasl500_best6/computer/12306.mp4,data/processed/final/wlasl500_best6_manifest.csv
+12315,computer,0,val,assets/demo_clips/final/wlasl500_best6/computer/12315.mp4,assets/demo_clips/final/wlasl500_best6/computer/12315.mp4,data/processed/final/wlasl500_best6_manifest.csv
+17730,drink,1,test,assets/demo_clips/final/wlasl500_best6/drink/17730.mp4,assets/demo_clips/final/wlasl500_best6/drink/17730.mp4,data/processed/final/wlasl500_best6_manifest.csv
+69302,drink,1,val,assets/demo_clips/final/wlasl500_best6/drink/69302.mp4,assets/demo_clips/final/wlasl500_best6/drink/69302.mp4,data/processed/final/wlasl500_best6_manifest.csv
+19255,enjoy,2,test,assets/demo_clips/final/wlasl500_best6/enjoy/19255.mp4,assets/demo_clips/final/wlasl500_best6/enjoy/19255.mp4,data/processed/final/wlasl500_best6_manifest.csv
+19257,enjoy,2,val,assets/demo_clips/final/wlasl500_best6/enjoy/19257.mp4,assets/demo_clips/final/wlasl500_best6/enjoy/19257.mp4,data/processed/final/wlasl500_best6_manifest.csv
+32157,language,3,test,assets/demo_clips/final/wlasl500_best6/language/32157.mp4,assets/demo_clips/final/wlasl500_best6/language/32157.mp4,data/processed/final/wlasl500_best6_manifest.csv
+32156,language,3,val,assets/demo_clips/final/wlasl500_best6/language/32156.mp4,assets/demo_clips/final/wlasl500_best6/language/32156.mp4,data/processed/final/wlasl500_best6_manifest.csv
+55768,sunday,4,test,assets/demo_clips/final/wlasl500_best6/sunday/55768.mp4,assets/demo_clips/final/wlasl500_best6/sunday/55768.mp4,data/processed/final/wlasl500_best6_manifest.csv
+55778,sunday,4,val,assets/demo_clips/final/wlasl500_best6/sunday/55778.mp4,assets/demo_clips/final/wlasl500_best6/sunday/55778.mp4,data/processed/final/wlasl500_best6_manifest.csv
+61804,visit,5,test,assets/demo_clips/final/wlasl500_best6/visit/61804.mp4,assets/demo_clips/final/wlasl500_best6/visit/61804.mp4,data/processed/final/wlasl500_best6_manifest.csv
+61810,visit,5,val,assets/demo_clips/final/wlasl500_best6/visit/61810.mp4,assets/demo_clips/final/wlasl500_best6/visit/61810.mp4,data/processed/final/wlasl500_best6_manifest.csv

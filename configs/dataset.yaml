@@ -1,0 +1,45 @@
+dataset:
+  name: wlasl100
+  task: isolated_word_recognition
+
+  # Raw WLASL files
+  raw_index_json: data/raw/WLASL100/WLASL100.json
+  raw_video_dir: data/raw/WLASL100/videos
+  metadata_path: data/raw/WLASL100/metadata.json
+
+  # Landmark output folder
+  landmarks_dir: data/landmarks/wlasl100
+
+  # Backward-compatible key used by older scripts.
+  # Kept this as the downloaded/available-video manifest.
+  processed_manifest: data/processed/wlasl100_manifest_downloaded.csv
+
+  # Stage-specific manifests. These stay fixed so the YAML does not need
+  # to be manually changed between download, extraction, manifest-building,
+  # and training.
+  original_manifest_csv: data/processed/wlasl100_manifest.csv
+  downloaded_manifest_csv: data/processed/wlasl100_manifest_downloaded.csv
+  landmark_manifest_csv: data/processed/wlasl100_manifest_landmarks.csv
+  missing_landmark_manifest_csv: data/processed/wlasl100_manifest_missing_landmarks.csv
+
+preprocessing:
+  num_frames: 32
+  frame_size: 224
+  max_hands: 2
+  landmarks_per_hand: 21
+  coordinates: 3
+  missing_hand_value: 0.0
+  normalize_landmarks: true
+
+mediapipe:
+  model_path: models/hand_landmarker.task
+  input_color: rgb
+  fps: 30.0
+
+logging:
+  landmark_log_dir: logs/landmark_extraction
+
+splits:
+  train: train
+  val: val
+  test: test

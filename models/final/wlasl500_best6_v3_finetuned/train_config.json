@@ -1,0 +1,23 @@
+{
+  "manifest": "data/processed/wlasl500_best6_manifest.csv",
+  "output_dir": "models/wlasl500_best6_v3_finetuned",
+  "model": "transformer",
+  "epochs": 60,
+  "batch_size": 16,
+  "hidden_dim": 256,
+  "num_layers": 3,
+  "num_heads": 4,
+  "dropout": 0.2,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "normalize": "wrist",
+  "use_delta": true,
+  "use_class_weights": true,
+  "balanced_sampler": true,
+  "label_smoothing": 0.03,
+  "init_checkpoint": "models/wlasl500_best50_v3_scratch/best_model.pt",
+  "freeze_backbone_epochs": 0,
+  "patience": 15,
+  "seed": 42,
+  "num_workers": 0
+}
